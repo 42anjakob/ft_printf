@@ -1,32 +1,24 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: anjakob <anjakob@student.42heilbronn.de    +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2025/10/30 17:08:27 by anjakob           #+#    #+#              #
-#    Updated: 2025/10/31 18:33:14 by anjakob          ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+NAME		=	libftprintf.a
 
-NAME	=	libftprintf.a
+CFLAGS		=	-Wall -Wextra -Werror
 
-CFLAGS	=	-c -Wall -Wextra -Werror
+SRCS		=	ft_printf.c \
+				ft_printf_utils.c
 
-SRCS	=	ft_printf.c \
-			ft_printf_utils.c
-
-OBJS	=	${SRCS:.c=.o}
+OBJS_DIR	=	objects
+OBJS		=	${SRCS:%.c=$(OBJS_DIR)/%.o}
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	@$(CC) $(CFLAGS) $(SRCS)
 	@$(AR) -rcs $(NAME) $(OBJS)
 
+$(OBJS_DIR)/%.o: %.c
+	@mkdir -p $(OBJS_DIR)
+	@$(CC) $(CFLAGS) -c $< -o $@
+
 clean:
-	@rm -f $(OBJS)
+	@rm -rf $(OBJS_DIR)
 
 fclean: clean
 	@rm -f $(NAME)
