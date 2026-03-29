@@ -1,6 +1,6 @@
 NAME		=	libftprintf.a
 
-CFLAGS		=	-c -Wall -Wextra -Werror
+FLAGS		=	-c -Wall -Wextra -Werror
 
 SRCS		=	ft_printf.c \
 				ft_printf_utils.c
@@ -15,7 +15,7 @@ $(NAME): $(OBJS)
 
 $(OBJS_DIR)/%.o: %.c
 	@mkdir -p $(OBJS_DIR)
-	@$(CC) $(CFLAGS) $< -o $@
+	@$(CC) $(FLAGS) $< -o $@
 
 clean:
 	@rm -rf $(OBJS_DIR)
